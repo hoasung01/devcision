@@ -1,0 +1,18 @@
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/stringio-3.1.2/ext/stringio
+/Users/hoasung01/.asdf/installs/ruby/3.3.3/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/stringio-3.1.2/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-ttif72 sitelibdir\=./.gem.20241108-34752-ttif72 clean
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/stringio-3.1.2/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-ttif72 sitelibdir\=./.gem.20241108-34752-ttif72
+compiling stringio.c
+linking shared-object stringio.bundle
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/stringio-3.1.2/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-ttif72 sitelibdir\=./.gem.20241108-34752-ttif72 install
+/opt/homebrew/bin/ginstall -c -m 0755 stringio.bundle ./.gem.20241108-34752-ttif72
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/stringio-3.1.2/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-ttif72 sitelibdir\=./.gem.20241108-34752-ttif72 clean

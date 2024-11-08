@@ -1,0 +1,19 @@
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+/Users/hoasung01/.asdf/installs/ruby/3.3.3/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-kge7v4 sitelibdir\=./.gem.20241108-34752-kge7v4 clean
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-kge7v4 sitelibdir\=./.gem.20241108-34752-kge7v4
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-kge7v4 sitelibdir\=./.gem.20241108-34752-kge7v4 install
+/opt/homebrew/bin/ginstall -c -m 0755 debug.bundle ./.gem.20241108-34752-kge7v4/debug
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-kge7v4 sitelibdir\=./.gem.20241108-34752-kge7v4 clean

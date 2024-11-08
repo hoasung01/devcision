@@ -1,0 +1,32 @@
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/psych-5.2.0/ext/psych
+/Users/hoasung01/.asdf/installs/ruby/3.3.3/bin/ruby extconf.rb
+checking for pkg-config for yaml-0.1... ["-I/opt/homebrew/Cellar/libyaml/0.2.5/include ", "-L/opt/homebrew/Cellar/libyaml/0.2.5/lib", "-lyaml"]
+checking for yaml.h... yes
+checking for yaml_get_version() in -lyaml... yes
+creating Makefile
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/psych-5.2.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-yt6fe9 sitelibdir\=./.gem.20241108-34752-yt6fe9 clean
+cd libyaml && /Applications/Xcode.app/Contents/Developer/usr/bin/make clean
+/bin/sh: line 0: cd: libyaml: No such file or directory
+make: [clean-so] Error 1 (ignored)
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/psych-5.2.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-yt6fe9 sitelibdir\=./.gem.20241108-34752-yt6fe9
+compiling psych.c
+compiling psych_emitter.c
+compiling psych_parser.c
+compiling psych_to_ruby.c
+compiling psych_yaml_tree.c
+linking shared-object psych.bundle
+ld: warning: ignoring duplicate libraries: '-lyaml'
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/psych-5.2.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-yt6fe9 sitelibdir\=./.gem.20241108-34752-yt6fe9 install
+/opt/homebrew/bin/ginstall -c -m 0755 psych.bundle ./.gem.20241108-34752-yt6fe9
+
+current directory: /Users/hoasung01/Documents/PersonalSpace/RailsSpace/PetProjects/devcision/vendor/bundle/ruby/3.3.0/gems/psych-5.2.0/ext/psych
+make DESTDIR\= sitearchdir\=./.gem.20241108-34752-yt6fe9 sitelibdir\=./.gem.20241108-34752-yt6fe9 clean
+cd libyaml && /Applications/Xcode.app/Contents/Developer/usr/bin/make clean
+/bin/sh: line 0: cd: libyaml: No such file or directory
+make: [clean-so] Error 1 (ignored)
