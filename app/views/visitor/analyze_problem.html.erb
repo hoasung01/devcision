@@ -9,9 +9,11 @@
       <!-- Problem Description Input -->
       <div class="mb-4">
         <label class="form-label">Describe Your Problem</label>
-        <textarea 
-          class="form-control" 
-          rows="4" 
+        <!-- Error container for displaying error messages -->
+        <div data-algorithm-advisor-target="errorContainer" class="alert alert-danger d-none" role="alert"></div>
+        <textarea
+          class="form-control"
+          rows="4"
           placeholder="E.g., I need to find the shortest path in a weighted graph with about 1000 nodes. Memory isn't a constraint, but I need fast execution."
           data-algorithm-advisor-target="description"></textarea>
       </div>
@@ -40,7 +42,7 @@
       </div>
 
       <!-- Important: Change button target to 'analyzeButton' -->
-      <button class="btn btn-primary w-100" 
+      <button class="btn btn-primary w-100"
               data-algorithm-advisor-target="analyzeButton"
               data-action="click->algorithm-advisor#getAiAnalysis">
         Analyze with AI

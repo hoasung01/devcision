@@ -9,7 +9,8 @@ export default class extends Controller {
     "suggestions",
     "primarySuggestion",
     "alternativeSuggestions",
-    "analyzeButton"  // Change this to match the view target
+    "analyzeButton",
+    "errorContainer"
   ]
 
   // Analyze input as user types (with debounce)
@@ -23,8 +24,22 @@ export default class extends Controller {
     }, 1000)
   }
 
+  displayError(errorMessage) {
+    // Set the error message
+    this.errorContainerTarget.textContent = errorMessage;
+
+    // Display the error message
+    this.errorContainerTarget.classList.remove('d-none');
+
+    // Automatically hide the error after a few seconds
+    setTimeout(() => {
+      this.errorContainerTarget.classList.add('d-none');
+    }, 5000); // Adjust the time as needed
+  }
+
+
   // Get AI analysis
-  async getAiAnalysis(event) {
+  getAiAnalysis = async (event) => {
     event.preventDefault()
 
     // Show loading state
