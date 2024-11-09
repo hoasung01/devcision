@@ -11,6 +11,8 @@ class Algorithm < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validates :name, uniqueness: { scope: :algorithm_type_id }
 
+  enum difficulty_level: { beginner: 1, intermediate: 2, advanced: 3, expert: 4 }
+
   scope :by_difficulty, ->(level) { where(difficulty_level: level) }
   scope :stable_only, -> { where(stable: true) }
   scope :in_place_only, -> { where(in_place: true) }
