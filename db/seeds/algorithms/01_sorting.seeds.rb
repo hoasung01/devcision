@@ -46,7 +46,10 @@ after :shared do
       stable: false,
       in_place: true,
       recursive: false,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:beginner]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:beginner],
+      use_cases: ['Small datasets', 'Memory-efficient sorting'],
+      advantages: ['Memory-efficient', 'Simple to implement'],
+      disadvantages: ['Slow for large datasets', 'Not stable']
     },
     {
       name: 'Insertion Sort',
@@ -58,7 +61,10 @@ after :shared do
       stable: true,
       in_place: true,
       recursive: false,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:beginner]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:beginner],
+      use_cases: ['Nearly sorted data', 'Small datasets', 'Real-time systems'],
+      advantages: ['Efficient for small data', 'Stable sort', 'In-place sorting'],
+      disadvantages: ['Inefficient for large datasets', 'Quadratic time complexity']
     },
     {
       name: 'Merge Sort',
@@ -70,7 +76,10 @@ after :shared do
       stable: true,
       in_place: false,
       recursive: true,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate],
+      use_cases: ['Large datasets', 'Linked lists', 'External sorting'],
+      advantages: ['Stable sort', 'Good for large data', 'Predictable O(n log n) time'],
+      disadvantages: ['Requires extra memory', 'Not in-place']
     },
     {
       name: 'Quick Sort',
@@ -82,7 +91,10 @@ after :shared do
       stable: false,
       in_place: true,
       recursive: true,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate],
+      use_cases: ['Large datasets', 'Cache-efficient sorting', 'Systems with limited memory'],
+      advantages: ['In-place sorting', 'Efficient on average', 'Cache-friendly'],
+      disadvantages: ['Unstable sort', 'Worst case O(n^2) without pivot optimization']
     },
     {
       name: 'Heap Sort',
@@ -94,7 +106,10 @@ after :shared do
       stable: false,
       in_place: true,
       recursive: false,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate],
+      use_cases: ['Heap-based structures', 'Priority queues', 'Large datasets'],
+      advantages: ['Good for large datasets', 'Memory efficient'],
+      disadvantages: ['Not stable', 'Not cache-friendly']
     },
     {
       name: 'Shell Sort',
@@ -106,7 +121,10 @@ after :shared do
       stable: false,
       in_place: true,
       recursive: false,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate],
+      use_cases: ['Moderate-size datasets', 'Partially sorted data'],
+      advantages: ['In-place sorting', 'Improves on insertion sort for large data'],
+      disadvantages: ['Performance varies with gap sequence', 'Not stable']
     }
   ].freeze
 
@@ -137,7 +155,10 @@ after :shared do
       stable: true,
       in_place: false,
       recursive: false,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:intermediate],
+      use_cases: ['Small integer datasets', 'Data with limited range'],
+      advantages: ['Efficient for small range integers', 'Stable sort'],
+      disadvantages: ['Limited to integer keys', 'Requires additional memory for counting']
     },
     {
       name: 'Radix Sort',
@@ -149,7 +170,10 @@ after :shared do
       stable: true,
       in_place: false,
       recursive: false,
-      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:advanced]
+      difficulty_level: SeedConstants::DIFFICULTY_LEVELS[:advanced],
+      use_cases: ['Large datasets with uniform keys', 'Sorting by numeric keys'],
+      advantages: ['Efficient for large data sets', 'Stable sort'],
+      disadvantages: ['Limited to integers', 'Extra memory required']
     }
   ].freeze
 
@@ -167,5 +191,9 @@ after :shared do
       complexity.explanation = "Time complexity analysis for #{algorithm_data[:name]}"
     end
   end
-  puts "\Sorting Algorithms seeding completed!"
+
+  puts "\nSorting Algorithms seeding completed!"
+  puts "Created/Updated:"
+  puts "- #{comparison_sorting.algorithms.count} Comparison Based Sorting Algorithms"
+  puts "- #{distribution_sorting.algorithms.count} Distribution Based Sorting Algorithms"
 end
