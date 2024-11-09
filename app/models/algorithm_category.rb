@@ -1,0 +1,2 @@
+class AlgorithmCategory < ApplicationRecord
+end
