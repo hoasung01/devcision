@@ -39,17 +39,7 @@ cd devcision
 bundle install
 ```
 
-3. Add the following gems to your Gemfile:
-
-```ruby
-# Gemfile
-gem 'seedbank'     # For organized seed data
-gem 'faker'        # For generating sample data
-gem 'parallel'     # For parallel seed execution
-gem 'progress_bar' # For showing seed progress
-```
-
-4. Setup database
+3. Setup database
 
 ```bash
 rails db:create
