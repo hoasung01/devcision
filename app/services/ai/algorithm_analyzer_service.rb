@@ -1,4 +1,4 @@
-module AI
+module Ai
   class AlgorithmAnalyzerService
     def initialize
       @client = OpenAI::Client.new(

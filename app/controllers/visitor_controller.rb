@@ -43,7 +43,7 @@ class VisitorController < ApplicationController
     return unless request.post?
 
     begin
-      analyzer = AI::AlgorithmAnalyzerService.new
+      analyzer = Ai::AlgorithmAnalyzerService.new
       @analysis = analyzer.analyze_requirements(params[:description])
       @suggestions = analyzer.suggest_algorithm(@analysis)
 
