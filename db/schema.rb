@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_022803) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_023018) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_022803) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_algorithm_categories_on_name"
     t.index ["slug"], name: "index_algorithm_categories_on_slug"
+  end
+
+  create_table "algorithm_complexities", force: :cascade do |t|
+    t.bigint "algorithm_id", null: false
+    t.string "operation_type"
+    t.string "best_case"
+    t.string "average_case"
+    t.string "worst_case"
+    t.text "explanation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["algorithm_id", "operation_type"], name: "index_algorithm_complexities_on_algorithm_id_and_operation_type", unique: true
+    t.index ["algorithm_id"], name: "index_algorithm_complexities_on_algorithm_id"
+  end
+
+  create_table "algorithm_examples", force: :cascade do |t|
+    t.bigint "algorithm_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.text "input_data"
+    t.text "output_data"
+    t.text "explanation"
+    t.integer "difficulty_level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["algorithm_id"], name: "index_algorithm_examples_on_algorithm_id"
   end
 
   create_table "algorithm_implementations", force: :cascade do |t|
@@ -81,6 +107,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_022803) do
     t.index ["slug"], name: "index_algorithms_on_slug", unique: true
   end
 
+  add_foreign_key "algorithm_complexities", "algorithms"
+  add_foreign_key "algorithm_examples", "algorithms"
   add_foreign_key "algorithm_implementations", "algorithms"
   add_foreign_key "algorithm_types", "algorithm_categories"
   add_foreign_key "algorithms", "algorithm_types"
