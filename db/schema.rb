@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_08_141907) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_021329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,4 +27,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_08_141907) do
     t.index ["slug"], name: "index_algorithm_categories_on_slug"
   end
 
+  create_table "algorithm_types", force: :cascade do |t|
+    t.bigint "algorithm_category_id", null: false
+    t.string "name", null: false
+    t.string "slug"
+    t.text "description"
+    t.integer "display_order"
+    t.json "characteristics"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["algorithm_category_id", "name"], name: "index_algorithm_types_on_algorithm_category_id_and_name", unique: true
+    t.index ["algorithm_category_id"], name: "index_algorithm_types_on_algorithm_category_id"
+    t.index ["slug"], name: "index_algorithm_types_on_slug", unique: true
+  end
+
+  add_foreign_key "algorithm_types", "algorithm_categories"
 end

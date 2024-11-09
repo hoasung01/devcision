@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  algorithm_category: one
+  name: MyString
+  slug: MyString
+  description: MyText
+  display_order: 1
+  characteristics: 
+
+two:
+  algorithm_category: two
+  name: MyString
+  slug: MyString
+  description: MyText
+  display_order: 1
+  characteristics: 
