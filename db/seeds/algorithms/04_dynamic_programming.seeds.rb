@@ -1,6 +1,6 @@
 after :shared do
   graph = AlgorithmCategory.find_or_create_by!(
-    name: 'Graph Algorithms',
+    name: 'Dynamic Programming Algorithms',
     description: 'Algorithms that solve problems related to graph data structures'
   )
 
