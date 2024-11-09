@@ -29,8 +29,8 @@
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/tech_vault.git
-cd tech_vault
+git clone git@github.com:hoasung01/devcision.git
+cd devcision
 ```
 
 2. Install dependencies
