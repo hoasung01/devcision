@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_023018) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_023136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "algorithm_benchmarks", force: :cascade do |t|
+    t.bigint "algorithm_implementation_id", null: false
+    t.integer "input_size"
+    t.string "input_type"
+    t.decimal "execution_time"
+    t.decimal "memory_usage"
+    t.json "metrics"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["algorithm_implementation_id", "input_size", "input_type"], name: "index_algorithm_benchmarks_on_impl_size_and_type", unique: true
+    t.index ["algorithm_implementation_id"], name: "index_algorithm_benchmarks_on_algorithm_implementation_id"
+  end
 
   create_table "algorithm_categories", force: :cascade do |t|
     t.string "name", null: false
@@ -107,6 +120,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_023018) do
     t.index ["slug"], name: "index_algorithms_on_slug", unique: true
   end
 
+  add_foreign_key "algorithm_benchmarks", "algorithm_implementations"
   add_foreign_key "algorithm_complexities", "algorithms"
   add_foreign_key "algorithm_examples", "algorithms"
   add_foreign_key "algorithm_implementations", "algorithms"
