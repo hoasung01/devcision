@@ -13,6 +13,7 @@
     - [Loading Seeds](#loading-seeds)
   - [Usage](#usage)
     - [Accessing Algorithms](#accessing-algorithms)
+  - [Demo](#demo)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -134,6 +135,17 @@ quick_sort.implementations.by_language('ruby')
 # Get examples
 quick_sort.examples.by_difficulty(:beginner)
 ```
+
+## Demo
+Explore some of the features of Devcision:
+
+### 1. Major algorithm
+![Algo](./app/assets/images/demo_images/algo.png)
+
+### 2. AI advisor
+Input a problem description to get AI-powered algorithm analysis and recommendations.
+
+![AI advisor](./app/assets/images/demo_images/ai.png)
 
 ## Contributing
 
