@@ -9,7 +9,13 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root 'visitor#index'
-  resources :visitor, only: [:index, :show]
+  resources :visitor, only: [:index, :show] do
+    collection do
+      get 'analyze_problem'  # GET for form
+      post 'analyze_problem' # POST for AI analysis
+    end
+  end
+
   get 'algorithm_categories/:slug', to: 'algorithm_categories#show', as: 'algorithm_category'
   get 'algorithms/:slug', to: 'algorithms#show', as: 'algorithm'
 

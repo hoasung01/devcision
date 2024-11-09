@@ -39,6 +39,28 @@ class VisitorController < ApplicationController
                            .page(params[:page]).per(10)
   end
 
+  def analyze_problem
+    return unless request.post?
+
+    begin
+      analyzer = AI::AlgorithmAnalyzerService.new
+      @analysis = analyzer.analyze_requirements(params[:description])
+      @suggestions = analyzer.suggest_algorithm(@analysis)
+
+      render json: {
+        success: true,
+        analysis: @analysis,
+        suggestions: @suggestions
+      }
+    rescue => e
+      Rails.logger.error("AI Analysis Error: #{e.message}")
+      render json: {
+        success: false,
+        error: "Analysis failed: #{e.message}"
+      }, status: :internal_server_error
+    end
+  end
+
   private
 
   def fetch_algorithms_by_category(category_name)

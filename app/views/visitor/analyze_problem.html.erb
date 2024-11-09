@@ -1,0 +1,50 @@
+<!-- app/views/visitor/analyze_problem.html.erb -->
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3>AI Algorithm Advisor</h3>
+    </div>
+
+    <div class="card-body" data-controller="algorithm-advisor">
+      <!-- Problem Description Input -->
+      <div class="mb-4">
+        <label class="form-label">Describe Your Problem</label>
+        <textarea 
+          class="form-control" 
+          rows="4" 
+          placeholder="E.g., I need to find the shortest path in a weighted graph with about 1000 nodes. Memory isn't a constraint, but I need fast execution."
+          data-algorithm-advisor-target="description"></textarea>
+      </div>
+
+      <!-- AI Analysis Results -->
+      <div class="mb-4 d-none" data-algorithm-advisor-target="analysisResult">
+        <h5>AI Analysis</h5>
+        <div class="alert alert-info">
+          <div class="mb-2">
+            <strong>Problem Type:</strong>
+            <span data-algorithm-advisor-target="problemType"></span>
+          </div>
+          <div class="mb-2">
+            <strong>Detected Requirements:</strong>
+            <ul data-algorithm-advisor-target="requirements" class="mb-0">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithm Suggestions -->
+      <div class="mb-4 d-none" data-algorithm-advisor-target="suggestions">
+        <h5>Recommended Algorithms</h5>
+        <div data-algorithm-advisor-target="primarySuggestion"></div>
+        <div data-algorithm-advisor-target="alternativeSuggestions"></div>
+      </div>
+
+      <!-- Important: Change button target to 'analyzeButton' -->
+      <button class="btn btn-primary w-100" 
+              data-algorithm-advisor-target="analyzeButton"
+              data-action="click->algorithm-advisor#getAiAnalysis">
+        Analyze with AI
+      </button>
+    </div>
+  </div>
+</div>
