@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_021329) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_022553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,5 +41,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_021329) do
     t.index ["slug"], name: "index_algorithm_types_on_slug", unique: true
   end
 
+  create_table "algorithms", force: :cascade do |t|
+    t.bigint "algorithm_type_id", null: false
+    t.string "name", null: false
+    t.string "slug"
+    t.text "description"
+    t.text "prerequisites"
+    t.string "time_complexity_best"
+    t.string "time_complexity_average"
+    t.string "time_complexity_worst"
+    t.string "space_complexity"
+    t.boolean "stable"
+    t.boolean "in_place"
+    t.boolean "recursive"
+    t.boolean "parallel_possible"
+    t.integer "difficulty_level"
+    t.json "use_cases"
+    t.json "advantages"
+    t.json "disadvantages"
+    t.json "edge_cases"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["algorithm_type_id", "name"], name: "index_algorithms_on_algorithm_type_id_and_name", unique: true
+    t.index ["algorithm_type_id"], name: "index_algorithms_on_algorithm_type_id"
+    t.index ["slug"], name: "index_algorithms_on_slug", unique: true
+  end
+
   add_foreign_key "algorithm_types", "algorithm_categories"
+  add_foreign_key "algorithms", "algorithm_types"
 end
