@@ -1,0 +1,40 @@
+<div class="min-vh-100 bg-light">
+  <!-- Hero Section -->
+  <div class="bg-white border-bottom py-5">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="display-4 font-weight-bold text-dark"><%= @category.name %></h1>
+        <p class="lead text-muted"><%= @category.description %></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container py-5">
+    <h2 class="text-center text-dark mb-4">Algorithms in <%= @category.name %></h2>
+
+    <!-- Algorithm List Section -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @algorithms.each do |algorithm| %>
+        <div class="col">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%= algorithm.name %></h5>
+              <p class="card-text text-muted"><%= algorithm.description %></p>
+              <div class="d-flex gap-2">
+                <span class="badge bg-primary text-light"><%= algorithm.time_complexity_average %></span>
+                <span class="badge bg-success text-light"><%= algorithm.difficulty_level %></span>
+              </div>
+              <%= link_to "View Details", algorithm_path(algorithm.slug), class: "btn btn-secondary btn-sm mt-3" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Pagination for Algorithms -->
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate @algorithms %> <!-- Pagination for algorithms in the selected category -->
+    </div>
+  </main>
+</div>

@@ -7,4 +7,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  root 'visitor#index'
+  resources :visitor, only: [:index, :show]
+  get 'algorithm_categories/:slug', to: 'algorithm_categories#show', as: 'algorithm_category'
+  get 'algorithms/:slug', to: 'algorithms#show', as: 'algorithm'
+
+  namespace :api do
+    resources :algorithm_categories, only: [:index]
+    resources :algorithms, only: [:index, :show]
+  end
 end
