@@ -15,12 +15,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_08_141907) do
   enable_extension "plpgsql"
 
   create_table "algorithm_categories", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug"
     t.text "descrtiption"
     t.string "icon"
     t.integer "display_order"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_algorithm_categories_on_name"
