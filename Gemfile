@@ -60,6 +60,9 @@ group :development do
   # gem "spring"
 
   gem "seedbank"
+  gem "faker"        # For generating sample data
+  gem "parallel"     # For parallel seed execution
+  gem "progress_bar" # For showing seed progress
 end
 
 group :test do
