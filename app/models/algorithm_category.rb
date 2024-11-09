@@ -9,4 +9,11 @@ class AlgorithmCategory < ApplicationRecord
 
   scope :active, -> { where(active: true) }
   scope :ordered, -> { order(display_order: :asc) }
+
+  def related_categories
+    AlgorithmCategory.where.not(id: id)
+                    .joins(algorithm_types: :algorithms)
+                    .where(algorithms: { difficulty_level: algorithms.select(:difficulty_level) })
+                    .distinct
+  end
 end
