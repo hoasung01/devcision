@@ -1,4 +1,6 @@
 class Algorithm < ApplicationRecord
+  include Sluggable
+
   belongs_to :algorithm_type
   has_many :implementations, class_name: 'AlgorithmImplementation', dependent: :destroy
   has_many :examples, class_name: 'AlgorithmExample', dependent: :destroy
@@ -8,8 +10,6 @@ class Algorithm < ApplicationRecord
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
   validates :name, uniqueness: { scope: :algorithm_type_id }
-
-  before_validation :generate_slug
 
   scope :by_difficulty, ->(level) { where(difficulty_level: level) }
   scope :stable_only, -> { where(stable: true) }
@@ -40,10 +40,6 @@ class Algorithm < ApplicationRecord
   end
 
   private
-
-  def generate_slug
-    self.slug ||= name.parameterize
-  end
 
   def complexity_factors
     factors = []

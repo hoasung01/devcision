@@ -1,4 +1,26 @@
+# db/seeds/algorithms/07_divide_conquer.seeds.rb
 after :shared do
+  def find_or_create_algorithm(type, algorithm_data)
+    algorithm = type.algorithms.find_or_initialize_by(name: algorithm_data[:name])
+
+    # Only update attributes if it's a new record
+    if algorithm.new_record?
+      algorithm.assign_attributes(algorithm_data.except(:name))
+      algorithm.save!
+    end
+
+    # Always ensure complexity exists
+    algorithm.complexities.find_or_create_by!(operation_type: 'general') do |complexity|
+      complexity.best_case = algorithm_data[:time_complexity_best]
+      complexity.average_case = algorithm_data[:time_complexity_average]
+      complexity.worst_case = algorithm_data[:time_complexity_worst]
+      complexity.explanation = "Time complexity analysis for #{algorithm_data[:name]}"
+    end
+
+    algorithm
+  end
+
+  # Create category
   divide_conquer = AlgorithmCategory.find_or_create_by!(
     name: 'Divide and Conquer Algorithms',
     description: 'Algorithms that break down problems into smaller subproblems, solve them, and combine the solutions'
@@ -20,13 +42,11 @@ after :shared do
     description: 'Fast arithmetic computation algorithms using divide and conquer'
   )
 
-  # Note: Merge Sort and Quick Sort are already defined in Sorting Algorithms category
-
   MATRIX_OPERATIONS_ALGORITHMS = [
     {
       name: "Strassen's Matrix Multiplication",
       description: 'Algorithm for efficient multiplication of matrices using seven recursive multiplications instead of eight',
-      time_complexity_best: 'O(n^2.807)', # n: matrix dimension
+      time_complexity_best: 'O(n^2.807)',
       time_complexity_average: 'O(n^2.807)',
       time_complexity_worst: 'O(n^2.807)',
       space_complexity: 'O(n^2)',
@@ -52,11 +72,6 @@ after :shared do
         'High constant factors',
         'Numerical stability issues',
         'Memory intensive'
-      ],
-      edge_cases: [
-        'Non-square matrices',
-        'Small matrices',
-        'Sparse matrices'
       ]
     }
   ].freeze
@@ -65,7 +80,7 @@ after :shared do
     {
       name: 'Closest Pair of Points',
       description: 'Algorithm to find the closest pair of points in a set of points in 2D space',
-      time_complexity_best: 'O(n log n)', # n: number of points
+      time_complexity_best: 'O(n log n)',
       time_complexity_average: 'O(n log n)',
       time_complexity_worst: 'O(n log n)',
       space_complexity: 'O(n)',
@@ -91,11 +106,6 @@ after :shared do
         'Memory overhead',
         'Requires sorted points',
         'Coordinate system dependent'
-      ],
-      edge_cases: [
-        'Collinear points',
-        'Duplicate points',
-        'All points equidistant'
       ]
     }
   ].freeze
@@ -103,8 +113,8 @@ after :shared do
   ARITHMETIC_OPERATIONS_ALGORITHMS = [
     {
       name: 'Karatsuba Algorithm',
-      description: 'Fast multiplication algorithm that reduces the multiplication of two n-digit numbers to three multiplications of n/2-digit numbers',
-      time_complexity_best: 'O(n^1.585)', # n: number of digits
+      description: 'Fast multiplication algorithm for large numbers',
+      time_complexity_best: 'O(n^1.585)',
       time_complexity_average: 'O(n^1.585)',
       time_complexity_worst: 'O(n^1.585)',
       space_complexity: 'O(n)',
@@ -130,70 +140,43 @@ after :shared do
         'Overhead for small numbers',
         'Memory recursive overhead',
         'Base dependent'
-      ],
-      edge_cases: [
-        'Single digit numbers',
-        'Numbers of different lengths',
-        'Zero padding required'
       ]
     }
   ].freeze
 
   # Seed algorithms
   ActiveRecord::Base.transaction do
-    # Seed Matrix Operations Algorithms
-    puts "\nSeeding Matrix Operations Algorithms..."
-    MATRIX_OPERATIONS_ALGORITHMS.each do |algorithm_data|
-      algorithm = matrix_operations.algorithms.find_or_create_by!(name: algorithm_data[:name]) do |algo|
-        algo.assign_attributes(algorithm_data)
+    begin
+      # Seed Matrix Operations Algorithms
+      puts "\nSeeding Matrix Operations Algorithms..."
+      MATRIX_OPERATIONS_ALGORITHMS.each do |algorithm_data|
+        find_or_create_algorithm(matrix_operations, algorithm_data)
+        print "."
       end
 
-      algorithm.complexities.find_or_create_by!(operation_type: 'general') do |complexity|
-        complexity.best_case = algorithm_data[:time_complexity_best]
-        complexity.average_case = algorithm_data[:time_complexity_average]
-        complexity.worst_case = algorithm_data[:time_complexity_worst]
-        complexity.explanation = "Time complexity analysis for #{algorithm_data[:name]}"
-      end
-      print "."
-    end
-
-    # Seed Geometric Problems Algorithms
-    puts "\nSeeding Geometric Problems Algorithms..."
-    GEOMETRIC_PROBLEMS_ALGORITHMS.each do |algorithm_data|
-      algorithm = geometric_problems.algorithms.find_or_create_by!(name: algorithm_data[:name]) do |algo|
-        algo.assign_attributes(algorithm_data)
+      # Seed Geometric Problems Algorithms
+      puts "\nSeeding Geometric Problems Algorithms..."
+      GEOMETRIC_PROBLEMS_ALGORITHMS.each do |algorithm_data|
+        find_or_create_algorithm(geometric_problems, algorithm_data)
+        print "."
       end
 
-      algorithm.complexities.find_or_create_by!(operation_type: 'general') do |complexity|
-        complexity.best_case = algorithm_data[:time_complexity_best]
-        complexity.average_case = algorithm_data[:time_complexity_average]
-        complexity.worst_case = algorithm_data[:time_complexity_worst]
-        complexity.explanation = "Time complexity analysis for #{algorithm_data[:name]}"
-      end
-      print "."
-    end
-
-    # Seed Arithmetic Operations Algorithms
-    puts "\nSeeding Arithmetic Operations Algorithms..."
-    ARITHMETIC_OPERATIONS_ALGORITHMS.each do |algorithm_data|
-      algorithm = arithmetic_operations.algorithms.find_or_create_by!(name: algorithm_data[:name]) do |algo|
-        algo.assign_attributes(algorithm_data)
+      # Seed Arithmetic Operations Algorithms
+      puts "\nSeeding Arithmetic Operations Algorithms..."
+      ARITHMETIC_OPERATIONS_ALGORITHMS.each do |algorithm_data|
+        find_or_create_algorithm(arithmetic_operations, algorithm_data)
+        print "."
       end
 
-      algorithm.complexities.find_or_create_by!(operation_type: 'general') do |complexity|
-        complexity.best_case = algorithm_data[:time_complexity_best]
-        complexity.average_case = algorithm_data[:time_complexity_average]
-        complexity.worst_case = algorithm_data[:time_complexity_worst]
-        complexity.explanation = "Time complexity analysis for #{algorithm_data[:name]}"
-      end
-      print "."
+      puts "\nDivide and Conquer Algorithms seeding completed!"
+      puts "Created/Updated:"
+      puts "- #{matrix_operations.algorithms.count} Matrix Operations Algorithms"
+      puts "- #{geometric_problems.algorithms.count} Geometric Problems Algorithms"
+      puts "- #{arithmetic_operations.algorithms.count} Arithmetic Operations Algorithms"
+    rescue ActiveRecord::RecordInvalid => e
+      puts "\nError during seeding: #{e.message}"
+      puts "Record that failed: #{e.record.inspect}"
+      raise e
     end
   end
-
-  puts "\nDivide and Conquer Algorithms seeding completed!"
-  puts "Created/Updated:"
-  puts "- #{matrix_operations.algorithms.count} Matrix Operations Algorithms"
-  puts "- #{geometric_problems.algorithms.count} Geometric Problems Algorithms"
-  puts "- #{arithmetic_operations.algorithms.count} Arithmetic Operations Algorithms"
-  puts "Note: Merge Sort and Quick Sort are in Sorting Algorithms category"
 end
