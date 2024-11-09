@@ -1,4 +1,3 @@
-# db/seeds/algorithms/01_sorting.seeds.rb
 after :shared do
   # Create or find 'Sorting Algorithms' category
   sorting = AlgorithmCategory.find_or_create_by!(
