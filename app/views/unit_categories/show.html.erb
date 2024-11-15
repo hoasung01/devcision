@@ -1,0 +1,36 @@
+<div class="container py-5">
+  <h1 class="mb-4"><%= @unit_category.name %></h1>
+  <p class="lead mb-4"><%= @unit_category.description %></p>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @units.each do |unit| %>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= unit.name %> (<%= unit.symbol %>)</h5>
+            <% if unit.description.present? %>
+              <p class="card-text"><%= unit.description %></p>
+            <% end %>
+
+            <div class="mt-3">
+              <h6>Common Examples:</h6>
+              <% unit.unit_comparisons.limit(3).each do |comparison| %>
+                <div class="mb-2">
+                  <small class="text-muted"><%= comparison.comparison_type %></small>
+                  <div><%= comparison.title %>: <%= comparison.value %> <%= unit.symbol %></div>
+                </div>
+              <% end %>
+            </div>
+
+            <%= link_to "Learn More →", unit_path(unit.slug),
+                       class: "btn btn-outline-primary mt-3" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @units %>
+  </div>
+</div>

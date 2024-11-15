@@ -1,0 +1,43 @@
+<div class="tab-pane fade show active" id="algorithms">
+  <div class="row g-4">
+    <% algorithm_categories.each do |category| %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100 hover-lift">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <% if category.icon.present? %>
+                <i class="bi bi-<%= category.icon %> fs-4 me-2"></i>
+              <% end %>
+              <h3 class="card-title h5 text-dark mb-0"><%= category.name %></h3>
+            </div>
+
+            <p class="card-text text-muted mb-3"><%= category.description %></p>
+
+            <% if category.algorithm_types.any? %>
+              <div class="mb-3">
+                <small class="text-muted">Includes:</small>
+                <div class="mt-1">
+                  <% category.algorithm_types.first(3).each do |type| %>
+                    <span class="badge bg-light text-dark me-1"><%= type.name %></span>
+                  <% end %>
+                  <% if category.algorithm_types.size > 3 %>
+                    <span class="badge bg-light text-dark">+<%= category.algorithm_types.size - 3 %> more</span>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+            <%= link_to algorithm_category_path(category.slug),
+                        class: "btn btn-primary w-100" do %>
+              View Algorithms
+              <i class="bi bi-arrow-right ms-2"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'shared/pagination', records: algorithm_categories, param_name: :algo_page %>
+</div>
+

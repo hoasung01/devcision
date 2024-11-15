@@ -1,11 +1,16 @@
 class VisitorController < ApplicationController
   def index
-    # Get main algorithm categories with their types, paginated
+    # Algorithm categories
     @algorithm_categories = AlgorithmCategory.includes(:algorithm_types)
                                               .order(:display_order)
                                               .page(params[:page]).per(20)
+    # Unit categories
+    @unit_categories = UnitCategory.includes(:units)
+                                .order(:display_order)
+                                .page(params[:unit_page])
+                                .per(20)
 
-    # Group algorithms by categories, paginate the query results for each category
+    # Categorized algorithms
     @categorized_algorithms = {
       sorting: fetch_algorithms_by_category('Sorting Algorithms').page(params[:page]).per(6),
       searching: fetch_algorithms_by_category('Searching Algorithms').page(params[:page]).per(6),
@@ -15,6 +20,15 @@ class VisitorController < ApplicationController
       tree: fetch_algorithms_by_category('Tree Algorithms').page(params[:page]).per(6),
       greedy: fetch_algorithms_by_category('Greedy Algorithms').page(params[:page]).per(6),
       backtracking: fetch_algorithms_by_category('Backtracking Algorithms').page(params[:page]).per(6)
+    }
+
+    # Group units by categories
+    @categorized_units = {
+      storage: fetch_units_by_category('Storage Units').page(params[:page]).per(6),
+      speed: fetch_units_by_category('Speed Units').page(params[:page]).per(6),
+      processing: fetch_units_by_category('Processing Units').page(params[:page]).per(6),
+      memory: fetch_units_by_category('Memory Units').page(params[:page]).per(6),
+      network: fetch_units_by_category('Network Units').page(params[:page]).per(6)
     }
   end
 
@@ -63,10 +77,17 @@ class VisitorController < ApplicationController
 
   private
 
+  def fetch_units_by_category(category_name)
+    UnitCategory.find_by(name: category_name)
+      &.units
+      &.includes(:unit_comparisons)
+      &.order(:display_order) || Unit.none
+  end
+
   def fetch_algorithms_by_category(category_name)
     Algorithm.includes(:algorithm_type, :complexities)
-            .joins(algorithm_type: :algorithm_category)
-            .where(algorithm_categories: { name: category_name })
-            .order(:difficulty_level)
+      .joins(algorithm_type: :algorithm_category)
+      .where(algorithm_categories: { name: category_name })
+      .order(:difficulty_level)
   end
 end
