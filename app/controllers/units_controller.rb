@@ -9,7 +9,7 @@ class UnitsController < ApplicationController
 
   def show
     @unit = Unit.includes(:unit_comparisons, :unit_category)
-                .find_by!(slug: params[:slug])
+                .find(params[:id])
     @comparisons = @unit.unit_comparisons
                        .order(:comparison_type, :value)
     @conversions = UnitConversion.where(from_unit: @unit)

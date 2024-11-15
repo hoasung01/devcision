@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   get 'algorithms/:slug', to: 'algorithms#show', as: 'algorithm'
 
   resources :unit_categories, only: [:index, :show], param: :slug do
-   resources :units, only: [:index, :show], param: :slug
+   resources :units, only: [:index, :show]
   end
 
-  resources :units, only: [:show], param: :slug do
+  resources :units, only: [:show] do
     resources :unit_comparisons, only: [:index]
     collection do
       get :convert
