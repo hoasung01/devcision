@@ -19,6 +19,17 @@ Rails.application.routes.draw do
   get 'algorithm_categories/:slug', to: 'algorithm_categories#show', as: 'algorithm_category'
   get 'algorithms/:slug', to: 'algorithms#show', as: 'algorithm'
 
+  resources :unit_categories, only: [:index, :show], param: :slug do
+   resources :units, only: [:index, :show]
+  end
+
+  resources :units, only: [:show] do
+    resources :unit_comparisons, only: [:index]
+    collection do
+      get :convert
+    end
+  end
+
   namespace :api do
     resources :algorithm_categories, only: [:index]
     resources :algorithms, only: [:index, :show]

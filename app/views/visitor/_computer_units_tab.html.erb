@@ -1,0 +1,46 @@
+<div class="tab-pane fade" id="computer-units">
+  <div class="row g-4">
+    <% unit_categories.each do |category| %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100 hover-lift">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <% if category.icon.present? %>
+                <i class="bi bi-<%= category.icon %> fs-4 me-2"></i>
+              <% end %>
+              <h3 class="card-title h5 text-dark mb-0"><%= category.name %></h3>
+            </div>
+
+            <p class="card-text text-muted mb-3"><%= category.description %></p>
+
+            <% if category.units.any? %>
+              <div class="mb-3">
+                <small class="text-muted">Common units:</small>
+                <div class="mt-1">
+                  <% category.units.first(3).each do |unit| %>
+                    <span class="badge bg-light text-dark me-1">
+                      <%= unit.symbol %>
+                    </span>
+                  <% end %>
+                  <% if category.units.size > 3 %>
+                    <span class="badge bg-light text-dark">
+                      +<%= category.units.size - 3 %> more
+                    </span>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+            <%= link_to unit_category_path(category.slug),
+                        class: "btn btn-primary w-100" do %>
+              Explore Units
+              <i class="bi bi-arrow-right ms-2"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'shared/pagination', records: unit_categories, param_name: :unit_page %>
+</div>

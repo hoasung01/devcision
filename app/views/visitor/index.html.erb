@@ -3,39 +3,41 @@
   <div class="bg-white border-bottom py-5">
     <div class="container">
       <div class="text-center">
-        <h1 class="display-4 font-weight-bold text-dark">Explore Algorithm Categories</h1>
+        <p class="lead text-muted mb-4">Understand complex concepts with ease through practical examples and real-world comparisons</p>
+
+        <!-- Main Navigation Tabs -->
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active px-4 py-2"
+                    data-bs-toggle="tab"
+                    data-bs-target="#algorithms"
+                    type="button">
+              <i class="bi bi-code-slash me-2"></i>
+              Algorithms
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link px-4 py-2"
+                    data-bs-toggle="tab"
+                    data-bs-target="#computer-units"
+                    type="button">
+              <i class="bi bi-cpu me-2"></i>
+              Computer Units
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 
   <!-- Main Content -->
   <main class="container py-5">
-    <!-- Algorithm Categories Section -->
-    <section>
-      <!-- Algorithm Categories Grid -->
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <% @algorithm_categories.each do |category| %>
-          <div class="col">
-            <div class="card shadow-sm h-100">
-              <div class="card-body">
-                <!-- Category Name -->
-                <h3 class="card-title h5 text-dark"><%= category.name %></h3>
+    <div class="tab-content">
+      <!-- Algorithms Tab -->
+      <%= render 'algorithms_tab', algorithm_categories: @algorithm_categories %>
 
-                <!-- Category Description -->
-                <p class="card-text text-muted"><%= category.description %></p>
-
-                <!-- Link to View Algorithms in Category -->
-                <%= link_to "View Algorithms →", algorithm_category_path(category.slug), class: "btn btn-primary" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-      <!-- Pagination for Algorithm Categories -->
-      <div class="d-flex justify-content-center mt-4">
-        <%= paginate @algorithm_categories %> <!-- Pagination for categories -->
-      </div>
-    </section>
+      <!-- Computer Units Tab -->
+      <%= render 'computer_units_tab', unit_categories: @unit_categories %>
+    </div>
   </main>
 </div>

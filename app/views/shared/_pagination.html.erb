@@ -1,0 +1,5 @@
+<% if records.total_pages > 1 %>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate records, param_name: param_name %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_034203) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_14_163604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -115,9 +115,62 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_034203) do
     t.json "edge_cases"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "visualization_type"
     t.index ["algorithm_type_id", "name"], name: "index_algorithms_on_algorithm_type_id_and_name", unique: true
     t.index ["algorithm_type_id"], name: "index_algorithms_on_algorithm_type_id"
     t.index ["slug"], name: "index_algorithms_on_slug", unique: true
+  end
+
+  create_table "unit_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug"
+    t.text "description"
+    t.string "icon"
+    t.integer "display_order"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_unit_categories_on_slug", unique: true
+  end
+
+  create_table "unit_comparisons", force: :cascade do |t|
+    t.bigint "unit_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.decimal "value"
+    t.string "comparison_type"
+    t.json "metadata"
+    t.integer "difficulty_level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id", "value"], name: "index_unit_comparisons_on_unit_id_and_value"
+    t.index ["unit_id"], name: "index_unit_comparisons_on_unit_id"
+  end
+
+  create_table "unit_conversions", force: :cascade do |t|
+    t.bigint "from_unit_id", null: false
+    t.bigint "to_unit_id", null: false
+    t.decimal "conversion_factor", null: false
+    t.text "explanation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_unit_id", "to_unit_id"], name: "index_unit_conversions_on_from_unit_id_and_to_unit_id", unique: true
+    t.index ["from_unit_id"], name: "index_unit_conversions_on_from_unit_id"
+    t.index ["to_unit_id"], name: "index_unit_conversions_on_to_unit_id"
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.bigint "unit_category_id", null: false
+    t.string "name", null: false
+    t.string "symbol"
+    t.decimal "base_value"
+    t.string "base_unit"
+    t.text "description"
+    t.integer "display_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_category_id", "symbol"], name: "index_units_on_unit_category_id_and_symbol", unique: true
+    t.index ["unit_category_id"], name: "index_units_on_unit_category_id"
   end
 
   add_foreign_key "algorithm_benchmarks", "algorithm_implementations"
@@ -126,4 +179,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_034203) do
   add_foreign_key "algorithm_implementations", "algorithms"
   add_foreign_key "algorithm_types", "algorithm_categories"
   add_foreign_key "algorithms", "algorithm_types"
+  add_foreign_key "unit_comparisons", "units"
+  add_foreign_key "unit_conversions", "units", column: "from_unit_id"
+  add_foreign_key "unit_conversions", "units", column: "to_unit_id"
+  add_foreign_key "units", "unit_categories"
 end
